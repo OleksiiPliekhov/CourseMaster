@@ -35,4 +35,11 @@ public class User extends Person{
         }
         return false;
     }
+
+    public void updateFromDb(User user){
+        this.setFirstname(user.getFirstname());
+        this.setLastname(user.getLastname());
+        this.setPassword(user.getPassword());
+        this.setBalance(user.getBalance());
+    }
 }

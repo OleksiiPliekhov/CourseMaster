@@ -45,7 +45,6 @@ public class RegisterCourseServlet extends HttpServlet {
                 throw new RuntimeException(e);
             }
             if(course != null) {
-
                 request.setAttribute("course", course);
                 request.setAttribute("teacher", teacher);
                 request.getRequestDispatcher("/course-page.jsp").forward(request, response);

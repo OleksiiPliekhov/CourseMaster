@@ -116,4 +116,19 @@ public class DBTeacherUtils {
             preparedStatement2.executeUpdate();
         }
     }
+
+    public static boolean isTeacher(Connection con, int userId) throws SQLException {
+
+        String sqlRequest = "SELECT EXISTS (SELECT 1 FROM teacher WHERE user_id = ?)";
+
+        try(PreparedStatement preparedStatement = con.prepareStatement(sqlRequest)) {
+            preparedStatement.setInt(1, userId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                 return resultSet.getBoolean(1);
+            }
+        }
+        return false;
+    }
 }

@@ -8,6 +8,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBUserUtils {
+    public static User findUserById(Connection con, int userId) throws SQLException {
+        String sql = "SELECT  firstname, lastname, password, balance from \"user\"" +
+                " where id = ?";
+
+        try(PreparedStatement pstm = con.prepareStatement(sql)){
+            pstm.setInt(1, userId);
+
+            ResultSet resultSet = pstm.executeQuery();
+            if(resultSet.next()){
+                String firstname = resultSet.getString("firstname");
+                String lastname = resultSet.getString("lastname");
+                String password = resultSet.getString("password");
+                int balance = resultSet.getInt("balance");
+                return  new User(userId, firstname, lastname, password, balance);
+            }
+            return null;
+        }
+    }
+
     public static User findUser(Connection con, String firstname, String lastname, String password) throws SQLException {
         String sql = "SELECT id, firstname, lastname, password, balance from \"user\"" +
                 " where firstname = ? AND lastname = ? AND  password = ?  AND role = 'STUDENT'";
