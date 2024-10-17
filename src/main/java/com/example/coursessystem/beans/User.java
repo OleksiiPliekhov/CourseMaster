@@ -40,6 +40,5 @@ public class User extends Person{
         this.setFirstname(user.getFirstname());
         this.setLastname(user.getLastname());
         this.setPassword(user.getPassword());
-        this.setBalance(user.getBalance());
     }
 }

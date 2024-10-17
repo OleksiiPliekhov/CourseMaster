@@ -38,6 +38,32 @@ public class UserServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        Connection con = (Connection) session.getAttribute("connection");
+        User user = (User) session.getAttribute("user");
+        int userId = user.getId();
+
+        String firstname = (String) req.getAttribute("firstname");
+        String lastname = (String) req.getAttribute("lastname");
+        String password = (String) req.getAttribute("password");
+
+        User updatedUser = new User(0, firstname, lastname, password, 0);
+        user.updateFromDb(updatedUser);
+        try {
+            if(DBUserUtils.updateUser(con, user.getId(), updatedUser)){
+                req.setAttribute("user", user);
+                req.getRequestDispatcher("/user-page.jsp").forward(req, resp);
+            } else {
+                req.setAttribute("error", "updateError");
+                req.getRequestDispatcher("/user-update.jsp").forward(req, resp);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }

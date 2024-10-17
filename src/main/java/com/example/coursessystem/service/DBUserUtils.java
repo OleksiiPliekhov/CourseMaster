@@ -45,7 +45,7 @@ public class DBUserUtils {
         }
     }
 
-    public static int updateUser(Connection con, int userId, User newUser) throws SQLException {
+    public static boolean updateUser(Connection con, int userId, User newUser) throws SQLException {
         String sql = "UPDATE \"user\" SET firstname = ?, lastname = ?, password = ? where id = ?";
 
         try(PreparedStatement preparedStatement = con.prepareStatement(sql)) {
@@ -53,7 +53,7 @@ public class DBUserUtils {
             preparedStatement.setString(2, newUser.getLastname());
             preparedStatement.setString(3, newUser.getPassword());
             preparedStatement.setInt(4, userId);
-            return preparedStatement.executeUpdate();
+            return preparedStatement.executeUpdate() > 0;
         }
     }
 
