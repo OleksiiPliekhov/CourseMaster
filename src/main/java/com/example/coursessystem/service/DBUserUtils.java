@@ -81,4 +81,14 @@ public class DBUserUtils {
         }
     }
 
+    public static  int findMaxUserId(Connection con) throws SQLException{
+        String sqlQuery = "SELECT COUNT(id) as count_id FROM \"user\"";
+        try(PreparedStatement preparedStatement = con.prepareStatement(sqlQuery)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                return resultSet.getInt("count_id");            }
+        }
+        return 0;
+    }
+
 }
