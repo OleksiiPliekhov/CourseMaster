@@ -29,10 +29,10 @@ public class UserServlet extends HttpServlet {
                 req.getRequestDispatcher("/teacher").forward(req, resp);
             } else {
                 User res = DBUserUtils.findUserById(con, userId);
-                req.setAttribute("user", res);
                 //TODO: not sure in this redirect and think about user data update
                 assert res != null;
                 user.updateFromDb(res);
+                req.setAttribute("userInfo", res);
                 req.getRequestDispatcher("/user-page.jsp").forward(req, resp);
             }
         } catch (SQLException e) {
