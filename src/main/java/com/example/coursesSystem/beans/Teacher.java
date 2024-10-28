@@ -1,6 +1,6 @@
-package com.example.coursessystem.beans;
+package com.example.coursesSystem.beans;
 
-import com.example.coursessystem.Degree;
+import com.example.coursesSystem.Degree;
 
 public class Teacher extends Person{
     private Degree degree;

@@ -1,6 +1,6 @@
-package com.example.coursessystem.filter;
+package com.example.coursesSystem.filter;
 
-import com.example.coursessystem.DBConnection;
+import com.example.coursesSystem.DBConnection;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -23,7 +23,6 @@ public class DBConnectionFilter implements Filter {
 
         if (connection == null) {
             try {
-                // Создаем новое подключение к базе данных
                 connection = DBConnection.initDBConnection();
                 session.setAttribute("connection", connection);
             } catch (SQLException e) {

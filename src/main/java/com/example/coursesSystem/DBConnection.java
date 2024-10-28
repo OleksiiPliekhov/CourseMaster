@@ -1,4 +1,4 @@
-package com.example.coursessystem;
+package com.example.coursesSystem;
 import java.sql.*;
 
 public class DBConnection {

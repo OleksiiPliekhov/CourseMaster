@@ -1,7 +1,7 @@
-package com.example.coursessystem.tags;
+package com.example.coursesSystem.tags;
 
-import com.example.coursessystem.beans.User;
-import com.example.coursessystem.service.DBUserUtils;
+import com.example.coursesSystem.beans.User;
+import com.example.coursesSystem.repositories.DBUserUtils;
 
 import jakarta.servlet.jsp.tagext.TagSupport; // Обновлено на jakarta
 import jakarta.servlet.jsp.JspWriter; // Обновлено на jakarta

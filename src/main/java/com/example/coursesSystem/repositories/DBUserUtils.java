@@ -1,6 +1,6 @@
-package com.example.coursessystem.service;
+package com.example.coursesSystem.repositories;
 
-import com.example.coursessystem.beans.User;
+import com.example.coursesSystem.beans.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

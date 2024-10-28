@@ -1,8 +1,8 @@
-package com.example.coursessystem.auth;
+package com.example.coursesSystem.auth;
 
 
-import com.example.coursessystem.beans.User;
-import com.example.coursessystem.service.DBUserUtils;
+import com.example.coursesSystem.beans.User;
+import com.example.coursesSystem.repositories.DBUserUtils;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {

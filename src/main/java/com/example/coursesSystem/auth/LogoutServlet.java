@@ -1,4 +1,4 @@
-package com.example.coursessystem.auth;
+package com.example.coursesSystem.auth;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

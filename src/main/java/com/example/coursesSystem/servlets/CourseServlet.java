@@ -1,9 +1,9 @@
-package com.example.coursessystem.servlets;
+package com.example.coursesSystem.servlets;
 
-import com.example.coursessystem.DBConnection;
-import com.example.coursessystem.beans.Course;
-import com.example.coursessystem.beans.User;
-import com.example.coursessystem.service.DBCourseUtils;
+import com.example.coursesSystem.DBConnection;
+import com.example.coursesSystem.beans.Course;
+import com.example.coursesSystem.beans.User;
+import com.example.coursesSystem.repositories.DBCourseUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

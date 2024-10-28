@@ -1,11 +1,11 @@
-package com.example.coursessystem;
+package com.example.coursesSystem;
 
 import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import com.example.coursessystem.beans.User;
-import com.example.coursessystem.service.DBUserUtils;
+import com.example.coursesSystem.beans.User;
+import com.example.coursesSystem.repositories.DBUserUtils;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
@@ -22,7 +22,6 @@ public class HelloServlet extends HttpServlet {
         User user;
         try {
             Connection connection = DBConnection.initDBConnection();
-
             user = DBUserUtils.findUser(connection, "Alex", "Pliekhov", "password");
         } catch (SQLException e) {
             throw new RuntimeException(e);

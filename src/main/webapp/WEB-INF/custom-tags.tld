@@ -5,7 +5,7 @@
 
     <tag>
         <name>userBalance</name>
-        <tag-class>com.example.coursessystem.tags.UserBalanceTag</tag-class>
+        <tag-class>com.example.coursesSystem.tags.UserBalanceTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 </taglib>

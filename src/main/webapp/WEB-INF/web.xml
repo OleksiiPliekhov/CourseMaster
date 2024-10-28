@@ -8,7 +8,7 @@
 
     <filter>
         <filter-name>DBConnectionFilter</filter-name>
-        <filter-class>com.example.coursessystem.filter.DBConnectionFilter</filter-class>
+        <filter-class>com.example.coursesSystem.filter.DBConnectionFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -18,7 +18,7 @@
 
     <filter>
         <filter-name>authorizationFilter</filter-name>
-        <filter-class>com.example.coursessystem.auth.AuthFilter</filter-class>
+        <filter-class>com.example.coursesSystem.auth.AuthFilter</filter-class>
     </filter>
 
     <filter-mapping>

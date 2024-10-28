@@ -1,8 +1,9 @@
-package com.example.coursessystem.servlets;
+package com.example.coursesSystem.servlets;
 
-import com.example.coursessystem.beans.User;
-import com.example.coursessystem.service.DBTeacherUtils;
-import com.example.coursessystem.service.DBUserUtils;
+import com.example.coursesSystem.beans.Teacher;
+import com.example.coursesSystem.beans.User;
+import com.example.coursesSystem.repositories.DBTeacherUtils;
+import com.example.coursesSystem.repositories.DBUserUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,11 +26,11 @@ public class UserServlet extends HttpServlet {
 
         try {
             if(DBTeacherUtils.isTeacher(con, userId)){
-                req.setAttribute("teacherId", userId);
-                req.getRequestDispatcher("/teacher").forward(req, resp);
+                Teacher teacher = DBTeacherUtils.findTeacherById(con, userId);
+                req.setAttribute("teacherInfo", teacher);
+                req.getRequestDispatcher("/teacher-page.jsp").forward(req, resp);
             } else {
                 User res = DBUserUtils.findUserById(con, userId);
-                //TODO: not sure in this redirect and think about user data update
                 assert res != null;
                 user.updateFromDb(res);
                 req.setAttribute("userInfo", res);

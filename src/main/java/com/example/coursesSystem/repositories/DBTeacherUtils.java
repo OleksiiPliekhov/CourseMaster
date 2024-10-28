@@ -1,7 +1,7 @@
-package com.example.coursessystem.service;
+package com.example.coursesSystem.repositories;
 
-import com.example.coursessystem.Degree;
-import com.example.coursessystem.beans.Teacher;
+import com.example.coursesSystem.Degree;
+import com.example.coursesSystem.beans.Teacher;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

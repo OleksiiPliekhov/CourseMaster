@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.example.coursessystem.UserBean" %>
+<%@ page import="com.example.coursesSystem.UserBean" %>
 <html>
 <head>
     <title>User Page</title>
 </head>
 <body>
 <!-- Инициализация JavaBean -->
-<jsp:useBean id="user" class="com.example.coursessystem.UserBean" scope="request" />
+<jsp:useBean id="user" class="com.example.coursesSystem.UserBean" scope="request" />
 
 <!-- Передача значений из атрибута sessionUser в JavaBean user -->
 <jsp:setProperty name="user" property="firstname" value="${userInfo.firstname}" />

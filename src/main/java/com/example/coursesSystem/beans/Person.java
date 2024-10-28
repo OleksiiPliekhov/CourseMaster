@@ -1,6 +1,5 @@
-package com.example.coursessystem.beans;
+package com.example.coursesSystem.beans;
 
-import javax.annotation.processing.Generated;
 import java.util.Objects;
 
 public class Person {

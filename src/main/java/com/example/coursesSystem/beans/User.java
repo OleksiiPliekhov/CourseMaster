@@ -1,4 +1,4 @@
-package com.example.coursessystem.beans;
+package com.example.coursesSystem.beans;
 
 import java.io.Serializable;
 

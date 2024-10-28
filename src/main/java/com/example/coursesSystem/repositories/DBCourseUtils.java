@@ -1,6 +1,6 @@
-package com.example.coursessystem.service;
+package com.example.coursesSystem.repositories;
 
-import com.example.coursessystem.beans.Course;
+import com.example.coursesSystem.beans.Course;
 
 import java.sql.*;
 import java.util.ArrayList;
