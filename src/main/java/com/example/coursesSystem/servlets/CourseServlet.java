@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 @WebServlet(name="courseServlet", value = "/courses")
 public class CourseServlet extends HttpServlet {
@@ -23,14 +24,8 @@ public class CourseServlet extends HttpServlet {
         HttpSession session = req.getSession();
         Connection con = (Connection) session.getAttribute("connection");
         try {
-            con = DBConnection.initDBConnection();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        try {
             session.setAttribute("courses", DBCourseUtils.findAllCourses(con));
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -64,31 +59,6 @@ public class CourseServlet extends HttpServlet {
 
     }
 
-    @Override
-    protected void doPatch(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        Connection con = (Connection) session.getAttribute("connection");
-
-        String name = (String) session.getAttribute("name");
-        String description = (String) session.getAttribute("description");
-        int maxStudentsAmount  = (int) session.getAttribute("maxStudentsAmount");
-        int teacherId = (int) session.getAttribute("teacherId");
-
-        Course updatedCourse = new Course(name, description, maxStudentsAmount, teacherId);
-        boolean res = false;
-        try {
-            res = DBCourseUtils.updateCourse(con, updatedCourse);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        if(res) {
-            resp.sendRedirect(getServletContext() + "/course-page.jsp");
-        } else {
-            session.setAttribute("updateError",  "Something went wrong, try again");
-            resp.sendRedirect(getServletContext() + "/update-course-page.jsp");
-        }
-    }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

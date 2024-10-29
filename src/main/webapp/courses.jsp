@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.coursesSystem.beans.Course" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<
+<%@ page import="java.util.ArrayList" %>
+
+
 <html>
 <head>
     <title>Courses Page</title>
@@ -10,15 +10,19 @@
 <body>
 <h1>All Courses</h1>
 <ul>
-    <c:forEach var="course" items="${courses}">
-        <li>
-            <a href="course?id=${course.getCourseId()}">${course.getName()} - ${course.getDescription()}</a>
-            <form action="course" method="post">
-                <input type="hidden" name="courseId" value="${course.getCourseId()}" />
-                <input type="submit" value="Register">
-            </form>
-        </li>
-    </c:forEach>
+    <%
+        ArrayList<Course> courses = (ArrayList<Course>) session.getAttribute("courses");
+        if (courses != null && !courses.isEmpty()) {
+            for (Course c : courses) {
+    %>
+    <li>
+        <a href="course?id=<%= c.getCourseId() %>"><%= c.getName() %> - <%= c.getDescription() %></a>
+        <form action="course" method="post">
+            <input type="hidden" name="courseId" value="<%= c.getCourseId() %>" />
+            <input type="submit" value="Register">
+        </form>
+    </li>
+    <% } } %>
 </ul>
 </body>
 </html>

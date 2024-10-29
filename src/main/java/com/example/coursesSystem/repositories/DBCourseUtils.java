@@ -61,13 +61,15 @@ public class DBCourseUtils {
         return courses;
     }
 
-    public static boolean updateCourse(Connection con, Course updatedCourse) throws SQLException {
+    public static boolean updateCourse(Connection con, int courseId, Course updatedCourse) throws SQLException {
         String sql = "UPDATE course SET name = ?, description = ?, max_students_amount = ? where course.course_id = ?";
 
         try(PreparedStatement preparedStatement = con.prepareStatement(sql)) {
             preparedStatement.setString(1, updatedCourse.getName());
             preparedStatement.setString(2, updatedCourse.getDescription());
             preparedStatement.setInt(3, updatedCourse.getMaxStudentsAmount());
+            preparedStatement.setInt(4, courseId);
+
             return preparedStatement.executeUpdate() > 0;
         }
     }
@@ -97,12 +99,12 @@ public class DBCourseUtils {
         }
     }
 
-    public static boolean courseRegistration(Connection con, int course_id, int user_id) throws SQLException {
+    public static boolean courseRegistration(Connection con, int courseId, int userId) throws SQLException {
         String sqlRequest = "INSERT INTO participant VALUES (?, ?)";
 
         try(PreparedStatement preparedStatement = con.prepareStatement(sqlRequest)) {
-            preparedStatement.setInt(1, course_id);
-            preparedStatement.setInt(2, user_id);
+            preparedStatement.setInt(1, courseId);
+            preparedStatement.setInt(2, userId);
 
             return preparedStatement.executeUpdate() > 0;
         }
