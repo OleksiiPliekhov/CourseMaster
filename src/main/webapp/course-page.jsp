@@ -17,6 +17,7 @@
     <title>Course Page</title>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 <h1>${course.name}</h1>
 <p><strong>Description:</strong> ${course.description}</p>
 <p><strong>Max Students:</strong> ${course.maxStudentsAmount}</p>

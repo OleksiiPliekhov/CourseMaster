@@ -8,6 +8,7 @@
     <title>Courses Page</title>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 <h1>All Courses</h1>
 <ul>
     <%

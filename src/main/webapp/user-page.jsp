@@ -1,14 +1,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.coursesSystem.UserBean" %>
+<%@ page import="com.example.coursesSystem.beans.User" %>
+
+
+<%
+    Integer userId = ((User) session.getAttribute("user")).getId();
+    Integer userPageId = ((User) request.getAttribute("userInfo")).getId();
+
+%>
+
 <html>
 <head>
     <title>User Page</title>
 </head>
 <body>
-<!-- Инициализация JavaBean -->
+<%@ include file="header.jsp" %>
+
 <jsp:useBean id="user" class="com.example.coursesSystem.UserBean" scope="request" />
 
-<!-- Передача значений из атрибута sessionUser в JavaBean user -->
 <jsp:setProperty name="user" property="firstname" value="${userInfo.firstname}" />
 <jsp:setProperty name="user" property="lastname" value="${userInfo.lastname}" />
 <jsp:setProperty name="user" property="password" value="${userInfo.password}" />
@@ -19,5 +28,9 @@
 <p><strong>Last Name:</strong> <jsp:getProperty name="user" property="lastname" /></p>
 <p><strong>Password:</strong> <jsp:getProperty name="user" property="password" /></p>
 <p><strong>Balance:</strong> <jsp:getProperty name="user" property="balance" /></p>
+
+<% if (userId != null && userId.equals(userPageId)) { %>
+<a href="user-update.jsp?userId=${userInfo.getId()}">Edit Account</a>
+<% } %>
 </body>
 </html>
