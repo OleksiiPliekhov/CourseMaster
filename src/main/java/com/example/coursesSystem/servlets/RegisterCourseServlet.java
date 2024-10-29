@@ -19,7 +19,6 @@ import java.sql.SQLException;
 
 @WebServlet("/course")
 public class RegisterCourseServlet extends HttpServlet {
-    //TODO: add teacher to course page(minimum name and degree)
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -38,7 +37,6 @@ public class RegisterCourseServlet extends HttpServlet {
             Teacher teacher = null;
             try {
                 course = DBCourseUtils.findCourseById(con, courseId);
-                //TODO:watch more
                 assert course != null;
                 teacher = DBTeacherUtils.findTeacherById(con, course.getTeacherId());
             } catch (SQLException e) {
