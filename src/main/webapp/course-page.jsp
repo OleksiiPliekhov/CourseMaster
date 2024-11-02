@@ -26,8 +26,12 @@
 
 <% if (userId != null && userId.equals(teacherId)) { %>
 <a href="course-update.jsp?courseId=${course.courseId}">Edit Course</a>
-<% } %>
-
+<% } else {%>
+<form action="course" method="post">
+    <input type="hidden" name="courseId" value="${course.courseId}" />
+    <input type="submit" value="Register">
+</form>
+<%}%>
 
 </body>
 </html>
