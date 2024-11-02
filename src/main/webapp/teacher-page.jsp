@@ -1,11 +1,26 @@
-<%@ page import="com.example.coursesSystem.beans.Teacher" %>
-<%@ page import="com.example.coursesSystem.beans.User" %>
+<%@ page import="com.example.coursesSystem.models.Teacher" %>
+<%@ page import="com.example.coursesSystem.models.User" %>
+<%@ page import="com.example.coursesSystem.repositories.DBTeacherUtils" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
 <%
     Integer teacherId = ((User) session.getAttribute("user")).getId();
-    Integer teacherPageId = ((Teacher) request.getAttribute("teacherInfo")).getId();
+    Integer teacherPageId = null;
+    if((Teacher) request.getAttribute("teacherInfo") != null){
+        teacherPageId = ((Teacher) request.getAttribute("teacherInfo")).getId();
+    } else {
+        teacherPageId = Integer.parseInt(request.getParameter("teacherId"));
+        Connection con = (Connection) session.getAttribute("connection");
+        try {
+            Teacher teacherInfo = DBTeacherUtils.findTeacherById(con, teacherPageId);
+            request.setAttribute("teacherInfo", teacherInfo);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 %>
 

@@ -1,5 +1,5 @@
-<%@ page import="com.example.coursesSystem.beans.Course" %>
-<%@ page import="com.example.coursesSystem.beans.User" %><%--
+<%@ page import="com.example.coursesSystem.models.Course" %>
+<%@ page import="com.example.coursesSystem.models.User" %><%--
   Created by IntelliJ IDEA.
   User: aleks
   Date: 10/17/2024
@@ -21,7 +21,7 @@
 <h1>${course.name}</h1>
 <p><strong>Description:</strong> ${course.description}</p>
 <p><strong>Max Students:</strong> ${course.maxStudentsAmount}</p>
-<p><strong>Teacher: </strong> <a href="teacher-page.jsp">${teacher.getFirstname()} ${teacher.getLastname()} (${teacher.getDegree().name()})</a></p>
+<p><strong>Teacher: </strong> <a href="teacher-page.jsp?teacherId=${teacher.getId()}">${teacher.getFirstname()} ${teacher.getLastname()} (${teacher.getDegree().name()})</a></p>
 
 
 <% if (userId != null && userId.equals(teacherId)) { %>

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.example.coursesSystem.beans.Course" %>
+<%@ page import="com.example.coursesSystem.models.Course" %>
 <%@ page import="java.util.ArrayList" %>
 
 

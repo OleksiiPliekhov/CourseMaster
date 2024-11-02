@@ -1,4 +1,4 @@
-package com.example.coursesSystem.beans;
+package com.example.coursesSystem.models;
 
 import com.example.coursesSystem.Degree;
 

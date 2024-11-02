@@ -1,8 +1,7 @@
 package com.example.coursesSystem.servlets;
 
-import com.example.coursesSystem.DBConnection;
-import com.example.coursesSystem.beans.Course;
-import com.example.coursesSystem.beans.User;
+import com.example.coursesSystem.models.Course;
+import com.example.coursesSystem.models.User;
 import com.example.coursesSystem.repositories.DBCourseUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,7 +13,6 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 @WebServlet(name="courseServlet", value = "/courses")
 public class CourseServlet extends HttpServlet {

@@ -1,4 +1,4 @@
-package com.example.coursesSystem.beans;
+package com.example.coursesSystem.models;
 
 public class Course {
     int courseId;

@@ -1,7 +1,7 @@
 package com.example.coursesSystem.servlets;
 
-import com.example.coursesSystem.beans.Teacher;
-import com.example.coursesSystem.beans.User;
+import com.example.coursesSystem.models.Teacher;
+import com.example.coursesSystem.models.User;
 import com.example.coursesSystem.repositories.DBTeacherUtils;
 import com.example.coursesSystem.repositories.DBUserUtils;
 import jakarta.servlet.ServletException;

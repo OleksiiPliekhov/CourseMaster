@@ -4,7 +4,7 @@ import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import com.example.coursesSystem.beans.User;
+import com.example.coursesSystem.models.User;
 import com.example.coursesSystem.repositories.DBUserUtils;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

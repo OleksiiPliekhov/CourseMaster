@@ -1,6 +1,6 @@
 package com.example.coursesSystem.tags;
 
-import com.example.coursesSystem.beans.User;
+import com.example.coursesSystem.models.User;
 import com.example.coursesSystem.repositories.DBUserUtils;
 
 import jakarta.servlet.jsp.tagext.TagSupport; // Обновлено на jakarta

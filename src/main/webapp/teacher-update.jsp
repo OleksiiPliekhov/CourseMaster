@@ -15,7 +15,7 @@
 
 <html>
 <head>
-    <title>Update Course</title>
+    <title>Update Teacher</title>
 </head>
 <body>
 <h1>Update Course</h1>

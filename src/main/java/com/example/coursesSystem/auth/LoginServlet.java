@@ -1,7 +1,7 @@
 package com.example.coursesSystem.auth;
 
 
-import com.example.coursesSystem.beans.User;
+import com.example.coursesSystem.models.User;
 import com.example.coursesSystem.repositories.DBUserUtils;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

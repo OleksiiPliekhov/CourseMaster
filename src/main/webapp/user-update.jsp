@@ -1,6 +1,6 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="com.example.coursesSystem.repositories.DBUserUtils" %>
-<%@ page import="com.example.coursesSystem.beans.User" %><%--
+<%@ page import="com.example.coursesSystem.models.User" %><%--
   Created by IntelliJ IDEA.
   User: aleks
   Date: 10/18/2024

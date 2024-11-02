@@ -1,6 +1,6 @@
 package com.example.coursesSystem.repositories;
 
-import com.example.coursesSystem.beans.Course;
+import com.example.coursesSystem.models.Course;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.coursesSystem.UserBean" %>
-<%@ page import="com.example.coursesSystem.beans.User" %>
+<%@ page import="com.example.coursesSystem.models.User" %>
 
 
 <%
