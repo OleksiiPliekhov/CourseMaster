@@ -39,6 +39,7 @@
 <p><strong>Degree:</strong> ${teacherInfo.getQualification().name().toUpperCase()}</p>
 <p><strong>Experience (Years):</strong> ${teacherInfo.getExperience()}</p>
 
+<a href="participatingCourses.jsp?userId=${teacherInfo.getId()}">Participating Account</a>
 
 <% if (teacherId != null && teacherId.equals(teacherPageId)) { %>
 <a href="teacher-update.jsp?teacherId=${teacherInfo.getId()}">Edit Account</a>

@@ -59,7 +59,7 @@ public class RegisterCourseServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         Connection con = (Connection) session.getAttribute("connection");
         try {
-            DBCourseUtils.courseRegistration(con, courseId, user.getId());
+            DBCourseUtils.registerOnCourse(con, courseId, user.getId());
             resp.sendRedirect("/courses");
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -43,7 +43,7 @@ public class RegistrationServlet extends HttpServlet {
                 res = DBTeacherUtils.createTeacher(con, teacher);
             } else {
                 User user = new User(0, firstname, lastname, password, 0);
-                res = DBUserUtils.createUser(con, user);
+                DBUserUtils.createUser(con, user);
             }
 
             if (res) {

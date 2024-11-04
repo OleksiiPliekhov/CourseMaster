@@ -58,26 +58,19 @@ public class DBUserUtils {
         }
     }
 
-    public static boolean createUser(Connection con, User createdUser) throws SQLException {
+    public static void createUser(Connection con, User createdUser) throws SQLException {
         String sql = "INSERT INTO \"user\" (firstname, lastname, password, balance) " +
                 "VALUES (?, ?, ?, 0)";
 
         try(PreparedStatement preparedStatement = con.prepareStatement(sql)) {
-            con.setAutoCommit(false);
             preparedStatement.setString(1, createdUser.getFirstname());
             preparedStatement.setString(2, createdUser.getLastname());
             preparedStatement.setString(3, createdUser.getPassword());
 
-
-            System.out.println("Executing SQL: " + preparedStatement.toString());
-            boolean res =  preparedStatement.executeUpdate() > 0;
-            con.commit();
-            return res;
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace(); // Выводим информацию об ошибке
-            return false;
+            e.printStackTrace();
         }
-
     }
 
     public  static  void deleteUser(Connection con, int userId) throws SQLException{

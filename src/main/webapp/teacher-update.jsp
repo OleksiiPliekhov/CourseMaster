@@ -27,6 +27,10 @@
         <input type="text" name="lastname" id="lastname" value="<%= teacher.getLastname() %>">
     </p>
     <p>
+        <label for="password">Name:</label>
+        <input type="text" name="password" id="password" value="<%= teacher.getPassword() %>">
+    </p>
+    <p>
         <label for="qualification">Description:</label>
         <textarea name="qualification" id="qualification"><%= teacher.getQualification().name() %></textarea>
     </p>

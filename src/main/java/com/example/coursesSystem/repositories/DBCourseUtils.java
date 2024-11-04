@@ -99,7 +99,7 @@ public class DBCourseUtils {
         }
     }
 
-    public static boolean courseRegistration(Connection con, int courseId, int userId) throws SQLException {
+    public static boolean registerOnCourse(Connection con, int courseId, int userId) throws SQLException {
         String sqlRequest = "INSERT INTO participant VALUES (?, ?)";
 
         try(PreparedStatement preparedStatement = con.prepareStatement(sqlRequest)) {
@@ -110,4 +110,29 @@ public class DBCourseUtils {
         }
     }
 
+    public static List<Course> getUserCourses(Connection con, int userId) throws SQLException {
+        List<Course> courses = new ArrayList<>();
+
+        String query = """
+                SELECT c.course_id, c.name, c.description, c.max_students_amount, c.teacher_id FROM course c
+                JOIN participant p ON c.course_id = p.user_id WHERE p.user_id = ?
+                """;
+
+        try (PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setInt(1, userId);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Course course = new Course();
+                    course.setCourseId(rs.getInt("course_id"));
+                    course.setName(rs.getString("name"));
+                    course.setDescription(rs.getString("description"));
+                    course.setMaxStudentsAmount(rs.getInt("max_students_amount"));
+                    course.setTeacherId(rs.getInt("teacher_id"));
+                    courses.add(course);
+                }
+            }
+        }
+        return courses;
+    }
 }
