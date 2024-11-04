@@ -21,6 +21,7 @@
 <h1>${course.name}</h1>
 <p><strong>Description:</strong> ${course.description}</p>
 <p><strong>Max Students:</strong> ${course.maxStudentsAmount}</p>
+<p><strong>Price:</strong> ${course.price}</p>
 <p><strong>Teacher: </strong> <a href="teacher-page.jsp?teacherId=${teacher.getId()}">${teacher.getFirstname()} ${teacher.getLastname()} (${teacher.getQualification().name()})</a></p>
 
 

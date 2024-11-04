@@ -40,8 +40,9 @@ public class CourseServlet extends HttpServlet {
         String description = (String) session.getAttribute("description");
         int maxStudentsAmount  = (int) session.getAttribute("maxStudentsAmount");
         int teacherId = (int) session.getAttribute("teacherId");
+        double price = (double) session.getAttribute("price");
 
-        Course newCourse = new Course(name, description, maxStudentsAmount, teacherId);
+        Course newCourse = new Course(name, description, maxStudentsAmount, teacherId, price);
         boolean res = false;
         try {
              res = DBCourseUtils.createCourse(con, newCourse);

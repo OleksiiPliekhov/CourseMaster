@@ -34,6 +34,10 @@
         <input type="number" name="maxStudentsAmount" id="maxStudentsAmount" value="<%= course.getMaxStudentsAmount() %>">
     </p>
     <p>
+        <label for="price">Description:</label>
+        <textarea name="price" id="price"><%= course.getPrice() %></textarea>
+    </p>
+    <p>
         <input type="submit" value="Update Course">
     </p>
 </form>

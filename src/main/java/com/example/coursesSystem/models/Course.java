@@ -4,25 +4,31 @@ public class Course {
     int courseId;
     private String name;
     private  String description;
+
+
+
+    private double price;
     private int maxStudentsAmount;
     private int teacherId;
 
     public Course(){}
 
-    public Course(String name, String description, int maxStudentsAmount, int teacherId) {
+    public Course(String name, String description, int maxStudentsAmount, int teacherId, double price) {
 
         this.name = name;
         this.description = description;
         this.maxStudentsAmount = maxStudentsAmount;
         this.teacherId = teacherId;
+        this.price = price;
     }
 
-    public Course(int courseId, String name, String description, int maxStudentsAmount, int teacherId) {
+    public Course(int courseId, String name, String description, int maxStudentsAmount, int teacherId, double price) {
         this.courseId = courseId;
         this.name = name;
         this.description = description;
         this.maxStudentsAmount = maxStudentsAmount;
         this.teacherId = teacherId;
+        this.price = price;
     }
 
     public int getCourseId() {
@@ -65,6 +71,14 @@ public class Course {
         this.teacherId = teacherId;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
@@ -72,6 +86,7 @@ public class Course {
                 ", description='" + description + '\'' +
                 ", maxStudentsAmount=" + maxStudentsAmount +
                 ", teacheriD=" + teacherId +
+                ", price=" + price +
                 '}';
     }
 }

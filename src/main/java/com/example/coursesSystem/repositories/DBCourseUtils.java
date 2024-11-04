@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DBCourseUtils {
     public static Course findCourseByName(Connection con, String name) throws SQLException {
-        String sql = "SELECT course_id, description, max_students_amount, teacher_id from course where name = ?";
+        String sql = "SELECT course_id, description, max_students_amount, teacher_id, price from course where name = ?";
 
         try(PreparedStatement pstm = con.prepareStatement(sql)){
             pstm.setString(1, name);
@@ -19,14 +19,15 @@ public class DBCourseUtils {
                 String description = resultSet.getString("description");
                 int maxStudentsAmount = resultSet.getInt("max_students_amount");
                 int teacherId = resultSet.getInt("teacher_id");
-                return new Course(courseId, name, description, maxStudentsAmount, teacherId);
+                double price = resultSet.getDouble("price");
+                return new Course(courseId, name, description, maxStudentsAmount, teacherId, price);
             }
         }
         return null;
     }
 
     public static Course findCourseById(Connection con, int courseId) throws SQLException {
-        String sql = "SELECT name, description, max_students_amount, teacher_id from course where course_id = ?";
+        String sql = "SELECT name, description, max_students_amount, teacher_id, price from course where course_id = ?";
 
         try(PreparedStatement pstm = con.prepareStatement(sql)){
             pstm.setInt(1, courseId);
@@ -37,14 +38,15 @@ public class DBCourseUtils {
                 String description = resultSet.getString("description");
                 int maxStudentsAmount = resultSet.getInt("max_students_amount");
                 int teacherId = resultSet.getInt("teacher_id");
-                return new Course(courseId, name, description, maxStudentsAmount, teacherId);
+                double price = resultSet.getDouble("price");
+                return new Course(courseId, name, description, maxStudentsAmount, teacherId, price);
             }
         }
         return null;
     }
 
     public static List<Course> findAllCourses(Connection con) throws SQLException {
-        String sql = "SELECT course_id, name, description, max_students_amount, teacher_id from course ";
+        String sql = "SELECT course_id, name, description, max_students_amount, teacher_id, price from course ";
         List<Course> courses = new ArrayList<>();
         try(PreparedStatement pstm = con.prepareStatement(sql)){
 
@@ -55,34 +57,37 @@ public class DBCourseUtils {
                 String description = resultSet.getString("description");
                 int maxStudentsAmount = resultSet.getInt("max_students_amount");
                 int teacherId = resultSet.getInt("teacher_id");
-                courses.add(new Course(courseId, name, description, maxStudentsAmount, teacherId));
+                double price = resultSet.getDouble("price");
+                courses.add(new Course(courseId, name, description, maxStudentsAmount, teacherId, price));
             }
         }
         return courses;
     }
 
     public static boolean updateCourse(Connection con, int courseId, Course updatedCourse) throws SQLException {
-        String sql = "UPDATE course SET name = ?, description = ?, max_students_amount = ? where course.course_id = ?";
+        String sql = "UPDATE course SET name = ?, description = ?, max_students_amount = ?, price = ? where course.course_id = ?";
 
         try(PreparedStatement preparedStatement = con.prepareStatement(sql)) {
             preparedStatement.setString(1, updatedCourse.getName());
             preparedStatement.setString(2, updatedCourse.getDescription());
             preparedStatement.setInt(3, updatedCourse.getMaxStudentsAmount());
-            preparedStatement.setInt(4, courseId);
+            preparedStatement.setDouble(4, updatedCourse.getPrice());
+            preparedStatement.setInt(5, courseId);
 
             return preparedStatement.executeUpdate() > 0;
         }
     }
 
     public static boolean createCourse(Connection con, Course course) throws SQLException {
-        String sql = "INSERT INTO course (name, description, max_students_amount, teacher_id) " +
-                "VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO course (name, description, max_students_amount, teacher_id, price) " +
+                "VALUES (?, ?, ?, ?, ?)";
 
         try(PreparedStatement preparedStatement = con.prepareStatement(sql)) {
             preparedStatement.setString(1, course.getName());
             preparedStatement.setString(2, course.getDescription());
             preparedStatement.setInt(3, course.getMaxStudentsAmount());
             preparedStatement.setInt(4, course.getTeacherId());
+            preparedStatement.setDouble(5, course.getPrice());
 
             return preparedStatement.executeUpdate() > 0;
         }
@@ -99,14 +104,14 @@ public class DBCourseUtils {
         }
     }
 
-    public static boolean registerOnCourse(Connection con, int courseId, int userId) throws SQLException {
+    public static void registerOnCourse(Connection con, int courseId, int userId) throws SQLException {
         String sqlRequest = "INSERT INTO participant VALUES (?, ?)";
 
         try(PreparedStatement preparedStatement = con.prepareStatement(sqlRequest)) {
             preparedStatement.setInt(1, courseId);
             preparedStatement.setInt(2, userId);
 
-            return preparedStatement.executeUpdate() > 0;
+            preparedStatement.executeUpdate();
         }
     }
 
@@ -114,7 +119,7 @@ public class DBCourseUtils {
         List<Course> courses = new ArrayList<>();
 
         String query = """
-                SELECT c.course_id, c.name, c.description, c.max_students_amount, c.teacher_id FROM course c
+                SELECT c.course_id, c.name, c.description, c.max_students_amount, c.teacher_id, c.price FROM course c
                 JOIN participant p ON c.course_id = p.user_id WHERE p.user_id = ?
                 """;
 
@@ -129,6 +134,7 @@ public class DBCourseUtils {
                     course.setDescription(rs.getString("description"));
                     course.setMaxStudentsAmount(rs.getInt("max_students_amount"));
                     course.setTeacherId(rs.getInt("teacher_id"));
+                    course.setPrice(rs.getDouble("price"));
                     courses.add(course);
                 }
             }

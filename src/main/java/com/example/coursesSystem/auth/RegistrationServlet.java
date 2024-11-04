@@ -45,13 +45,8 @@ public class RegistrationServlet extends HttpServlet {
                 User user = new User(0, firstname, lastname, password, 0);
                 DBUserUtils.createUser(con, user);
             }
+            resp.sendRedirect("index.jsp");
 
-            if (res) {
-                resp.sendRedirect("index.jsp");
-            } else {
-                req.setAttribute("error", "invalid");
-                req.getRequestDispatcher("registration.jsp").forward(req, resp);
-            }
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("error", "invalid");

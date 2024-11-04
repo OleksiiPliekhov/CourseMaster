@@ -24,9 +24,9 @@ public class CourseUpdateServlet extends HttpServlet {
         String name = req.getParameter("name");
         String description = req.getParameter("description");
         String maxStudentsAmount = req.getParameter("maxStudentsAmount");
-        System.out.println("CourseId = " + courseId);
+        double price = Double.parseDouble(req.getParameter("price"));
 
-        Course updatedCourse = new Course(name, description, Integer.parseInt(maxStudentsAmount), 0);
+        Course updatedCourse = new Course(name, description, Integer.parseInt(maxStudentsAmount), 0, price);
 
         boolean res = false;
         try {

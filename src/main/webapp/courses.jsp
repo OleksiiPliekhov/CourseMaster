@@ -20,6 +20,7 @@
     %>
     <li>
         <a href="course?id=<%= c.getCourseId() %>"><%= c.getName() %> - <%= c.getDescription() %></a>
+        <p><strong>Price:</strong> <%= c.getPrice() %></p>
         <%
             if (c.getTeacherId() == userId) {
         %>

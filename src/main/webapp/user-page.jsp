@@ -30,7 +30,7 @@
 <p><strong>Balance:</strong> <jsp:getProperty name="user" property="balance" /></p>
 
 
-<a href="participatingCourses.jsp?userId=${userInfo.getId()}">Participating Account</a>
+<a href="participatingCourses.jsp?userId=${userInfo.getId()}">Participate in courses</a>
 
 <% if (userId != null && userId.equals(userPageId)) { %>
 <a href="user-update.jsp?userId=${userInfo.getId()}">Edit Account</a>
