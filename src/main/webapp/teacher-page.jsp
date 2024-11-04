@@ -36,12 +36,12 @@
 <p><strong>First Name:</strong> ${teacherInfo.getFirstname()}</p>
 <p><strong>Last Name:</strong> ${teacherInfo.getLastname()}</p>
 <p><strong>Password:</strong> ${teacherInfo.getPassword()}</p>
-<p><strong>Degree:</strong> ${teacherInfo.getDegree().name().toUpperCase()}</p>
-<p><strong>Experience (Years):</strong> ${teacherInfo.getExperienceYears()}</p>
+<p><strong>Degree:</strong> ${teacherInfo.getQualification().name().toUpperCase()}</p>
+<p><strong>Experience (Years):</strong> ${teacherInfo.getExperience()}</p>
 
 
 <% if (teacherId != null && teacherId.equals(teacherPageId)) { %>
-<a href="teacher-update.jsp?teacherId=${teacherPageId}">Edit Account</a>
+<a href="teacher-update.jsp?teacherId=${teacherInfo.getId()}">Edit Account</a>
 <% } %>
 </body>
 </html>

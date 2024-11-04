@@ -1,7 +1,7 @@
 CREATE TABLE teacher (
     user_id INTEGER PRIMARY KEY REFERENCES "user"(id),
-    degree VARCHAR(50),
-    experience_years INTEGER
+    qualification VARCHAR(50),
+    experience INTEGER
 );
 
-INSERT INTO "teacher" (user_id, degree, experience_years) VALUES (1, 'Master', 7);
+INSERT INTO "teacher" (user_id, qualification, experience) VALUES (1, 'Master', 7);

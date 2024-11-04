@@ -21,17 +21,16 @@ public class LoginServlet extends HttpServlet {
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String password = request.getParameter("password");
-        //TODO: if user not log in d not create new entity in DB
         if(firstname == null || lastname == null || password == null){
             response.sendRedirect(request.getContextPath() + "/login.jsp?error='Invalid first-/last-name or password'");
+            return;
         } else {
             User user = null;
             try {
                 user = DBUserUtils.findUser(con, firstname, lastname, password);
                 if(user == null){
-                    user = new User(0, firstname, lastname, password, 0);
-                    DBUserUtils.createUser(con, user);
-                    user.setId(DBUserUtils.findMaxUserId(con));
+                    response.sendRedirect(request.getContextPath() + "/login.jsp?error=Invalid first-/last-name or password");
+                    return;
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);

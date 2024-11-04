@@ -1,16 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.example.coursesSystem.models.Course" %>
-<%@ page import="com.example.coursesSystem.repositories.DBCourseUtils" %>
 <%@ page import="java.sql.Connection" %>
+<%@ page import="com.example.coursesSystem.models.Teacher" %>
+<%@ page import="com.example.coursesSystem.repositories.DBTeacherUtils" %>
 
 <%
-    int courseId = Integer.parseInt(request.getParameter("courseId"));
+    int teacherId = Integer.parseInt(request.getParameter("teacherId"));
     Connection con = (Connection) session.getAttribute("connection");
-    Course course = DBCourseUtils.findCourseById(con, courseId);
-    if (course == null) {
-        out.println("Course not found");
-        return;
-    }
+    Teacher teacher = DBTeacherUtils.findTeacherById(con, teacherId);
+
 %>
 
 <html>
@@ -19,22 +16,26 @@
 </head>
 <body>
 <h1>Update Course</h1>
-<form action="courseUpdate" method="post">
-    <input type="hidden" name="courseId" value="<%= course.getCourseId() %>">
+<form action="teacherUpdate" method="post">
+    <input type="hidden" name="teacherId" value="<%= teacher.getId() %>">
     <p>
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" value="<%= course.getName() %>">
+        <label for="firstname">Name:</label>
+        <input type="text" name="firstname" id="firstname" value="<%= teacher.getFirstname() %>">
     </p>
     <p>
-        <label for="description">Description:</label>
-        <textarea name="description" id="description"><%= course.getDescription() %></textarea>
+        <label for="lastname">Name:</label>
+        <input type="text" name="lastname" id="lastname" value="<%= teacher.getLastname() %>">
     </p>
     <p>
-        <label for="maxStudentsAmount">Max Students:</label>
-        <input type="number" name="maxStudentsAmount" id="maxStudentsAmount" value="<%= course.getMaxStudentsAmount() %>">
+        <label for="qualification">Description:</label>
+        <textarea name="qualification" id="qualification"><%= teacher.getQualification().name() %></textarea>
     </p>
     <p>
-        <input type="submit" value="Update Course">
+        <label for="experience">Max Students:</label>
+        <input type="number" name="experience" id="experience" value="<%= teacher.getExperience() %>">
+    </p>
+    <p>
+        <input type="submit" value="Update Teacher">
     </p>
 </form>
 </body>

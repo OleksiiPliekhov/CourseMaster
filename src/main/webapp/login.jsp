@@ -5,7 +5,7 @@
 </head>
 <body>
 <form action="login" method="post">
-    <% if ("invalid".equals(request.getParameter("error"))) { %>
+    <% if ("Invalid first-/last-name or password".equals(request.getParameter("error"))) { %>
     <p style="color:red;">Invalid username or password.</p>
     <% } %>
     <label for="firstname">Firstname:</label>
@@ -19,5 +19,7 @@
 
     <input type="submit" value="Continue">
 </form>
+
+<a href="registration.jsp">Sign in</a>
 </body>
 </html>

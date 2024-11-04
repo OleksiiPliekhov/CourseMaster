@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class DBTeacherUtils {
     public static Teacher findTeacherById(Connection con, int teacherId) throws SQLException {
-        String sql = "SELECT u.firstname, u.lastname, u.password, t.degree, t.experience_years FROM \"user\" u  INNER JOIN teacher t on t.user_id = u.id" +
+        String sql = "SELECT u.firstname, u.lastname, u.password, t.qualification, t.experience FROM \"user\" u  INNER JOIN teacher t on t.user_id = u.id" +
                 " where id = ?";
 
         try(PreparedStatement pstm = con.prepareStatement(sql)){
@@ -21,8 +21,8 @@ public class DBTeacherUtils {
                 String firstname = resultSet.getString("firstname");
                 String lastname = resultSet.getString("lastname");
                 String password = resultSet.getString("password");
-                String degreeStr = resultSet.getString("degree");
-                int experienceYears = resultSet.getInt("experience_years");
+                String degreeStr = resultSet.getString("qualification");
+                int experienceYears = resultSet.getInt("experience");
                 Degree degree = Degree.valueOf(degreeStr);
 
                 return  new Teacher(teacherId, firstname, lastname, password, degree, experienceYears);
@@ -32,7 +32,7 @@ public class DBTeacherUtils {
     }
 
     public static Teacher findTeacher(Connection con, String firstname, String lastname, String password) throws SQLException {
-        String sql = "SELECT u.firstname, u.lastname, u.password, t.degree, t.experience_years FROM \"user\" u  INNER JOIN teacher t on t.user_id = u.id" +
+        String sql = "SELECT u.firstname, u.lastname, u.password, t.qualification, t.experience FROM \"user\" u  INNER JOIN teacher t on t.user_id = u.id" +
                 " where firstname = ? AND lastname = ? AND  password = ?";
 
         try(PreparedStatement pstm = con.prepareStatement(sql)){
@@ -43,8 +43,8 @@ public class DBTeacherUtils {
             ResultSet resultSet = pstm.executeQuery();
             if(resultSet.next()){
                 int teacherId = resultSet.getInt("teacher_id");
-                String degreeStr =  resultSet.getString("degree");
-                int experienceYears = resultSet.getInt("experience_years");
+                String degreeStr =  resultSet.getString("qualification");
+                int experienceYears = resultSet.getInt("experience");
                 Degree degree = Degree.valueOf(degreeStr);
 
                 return  new Teacher(teacherId, firstname, lastname, password, degree, experienceYears);
@@ -55,7 +55,7 @@ public class DBTeacherUtils {
 
     public static boolean updateTeacher(Connection con, int teacherId, Teacher updatedTeacher) throws SQLException {
         String sql = "UPDATE \"user\" SET firstname = ?, lastname = ?, password = ? where id = ?";
-        String sqlRequest = "UPDATE teacher SET degree = ?, experience_years = ? where user_id = ?";
+        String sqlRequest = "UPDATE teacher SET qualification = ?, experience = ? where user_id = ?";
         int res;
         try(PreparedStatement preparedStatement = con.prepareStatement(sql); PreparedStatement preparedStatement2 = con.prepareStatement(sqlRequest)) {
             preparedStatement.setString(1, updatedTeacher.getFirstname());
@@ -64,19 +64,20 @@ public class DBTeacherUtils {
             preparedStatement.setInt(4, teacherId);
             res = preparedStatement.executeUpdate();
 
-            preparedStatement2.setString(1, updatedTeacher.getDegree().name().toUpperCase());
-            preparedStatement2.setInt(2, updatedTeacher.getExperienceYears());
+            preparedStatement2.setString(1, updatedTeacher.getQualification().name().toUpperCase());
+            preparedStatement2.setInt(2, updatedTeacher.getExperience());
+            preparedStatement2.setInt(3, teacherId);
             res += preparedStatement2.executeUpdate();
         }
 
         return res > 0;
     }
 
-    public static boolean createUser(Connection con, Teacher createdTeacher) throws SQLException {
-        String sql = "INSERT INTO \"user\" (firstname, lastname, password, role, balance) " +
-                "VALUES (?, ?, ?, 'TEACHER', 0)";
+    public static boolean createTeacher(Connection con, Teacher createdTeacher) throws SQLException {
+        String sql = "INSERT INTO \"user\" (firstname, lastname, password, balance) " +
+                "VALUES (?, ?, ?, 0)";
 
-        String sqlRequest = "INSERT INTO teacher (user_id, degree, experience_years)" +
+        String sqlRequest = "INSERT INTO teacher (user_id, qualification, experience)" +
                 "VALUES (?, ?, ?)";
 
         int res = 0;
@@ -86,8 +87,8 @@ public class DBTeacherUtils {
             preparedStatement.setString(3, createdTeacher.getPassword());
 
             res =  preparedStatement.executeUpdate();
-            preparedStatement2.setString(1, createdTeacher.getDegree().toString().toUpperCase());
-            preparedStatement2.setInt(2, createdTeacher.getExperienceYears());
+            preparedStatement2.setString(1, createdTeacher.getQualification().toString().toUpperCase());
+            preparedStatement2.setInt(2, createdTeacher.getExperience());
 
             res += preparedStatement2.executeUpdate();
         }

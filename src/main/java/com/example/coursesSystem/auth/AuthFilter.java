@@ -27,7 +27,7 @@ public class AuthFilter implements Filter {
 
 
         boolean loggedIn = req.getSession(false) != null && req.getSession(false).getAttribute("user") != null;
-        boolean loginRequest = requestURI.equals(loginURI) || requestURI.endsWith("/login") || requestURI.endsWith("/login.jsp");
+        boolean loginRequest = requestURI.equals(loginURI) || requestURI.endsWith("/login") || requestURI.endsWith("/login.jsp") || requestURI.endsWith("/registration.jsp");
 
         if (loggedIn || loginRequest) {
             filterChain.doFilter(servletRequest, servletResponse);

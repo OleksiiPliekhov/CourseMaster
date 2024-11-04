@@ -10,7 +10,6 @@ public class DBConnection {
         String dbPassword = "admin";
 
         Class.forName(dbDriver);
-        Connection con = DriverManager.getConnection(dbURL + dbName, dbUsername, dbPassword);
-        return con;
+        return DriverManager.getConnection(dbURL + dbName, dbUsername, dbPassword);
     }
 }

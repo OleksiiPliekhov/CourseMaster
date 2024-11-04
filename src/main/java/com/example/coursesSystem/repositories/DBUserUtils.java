@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 public class DBUserUtils {
     public static User findUserById(Connection con, int userId) throws SQLException {
@@ -29,7 +30,7 @@ public class DBUserUtils {
 
     public static User findUser(Connection con, String firstname, String lastname, String password) throws SQLException {
         String sql = "SELECT id, firstname, lastname, password, balance from \"user\"" +
-                " where firstname = ? AND lastname = ? AND  password = ?  AND role = 'STUDENT'";
+                " where firstname = ? AND lastname = ? AND  password = ?";
 
         try(PreparedStatement pstm = con.prepareStatement(sql)){
             pstm.setString(1, firstname);
@@ -57,17 +58,26 @@ public class DBUserUtils {
         }
     }
 
-    public static int createUser(Connection con, User createdUser) throws SQLException {
-        String sql = "INSERT INTO \"user\" (firstname, lastname, password, role, balance) " +
-                "VALUES (?, ?, ?, 'STUDENT', 0)";
+    public static boolean createUser(Connection con, User createdUser) throws SQLException {
+        String sql = "INSERT INTO \"user\" (firstname, lastname, password, balance) " +
+                "VALUES (?, ?, ?, 0)";
 
         try(PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+            con.setAutoCommit(false);
             preparedStatement.setString(1, createdUser.getFirstname());
             preparedStatement.setString(2, createdUser.getLastname());
             preparedStatement.setString(3, createdUser.getPassword());
 
-            return preparedStatement.executeUpdate();
+
+            System.out.println("Executing SQL: " + preparedStatement.toString());
+            boolean res =  preparedStatement.executeUpdate() > 0;
+            con.commit();
+            return res;
+        } catch (SQLException e) {
+            e.printStackTrace(); // Выводим информацию об ошибке
+            return false;
         }
+
     }
 
     public  static  void deleteUser(Connection con, int userId) throws SQLException{
