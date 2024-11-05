@@ -34,7 +34,7 @@
         <input type="number" name="maxStudentsAmount" id="maxStudentsAmount" value="<%= course.getMaxStudentsAmount() %>">
     </p>
     <p>
-        <label for="price">Description:</label>
+        <label for="price">Price:</label>
         <textarea name="price" id="price"><%= course.getPrice() %></textarea>
     </p>
     <p>

@@ -2,6 +2,8 @@
 <%@ page import="com.example.coursesSystem.models.Course" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.coursesSystem.models.User" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="com.example.coursesSystem.repositories.DBCourseUtils" %>
 
 <html>
 <head>
@@ -19,12 +21,17 @@
             for (Course c : courses) {
     %>
     <li>
-        <a href="course?id=<%= c.getCourseId() %>"><%= c.getName() %> - <%= c.getDescription() %></a>
+        <a href="course?courseId=<%= c.getCourseId() %>"><%= c.getName() %> - <%= c.getDescription() %></a>
         <p><strong>Price:</strong> <%= c.getPrice() %></p>
         <%
             if (c.getTeacherId() == userId) {
         %>
         <p>Your course</p>
+        <%
+            // if user already registered for the course, display a message, user DBCourseUtils.isUserRegisteredOnCourse() method
+            } else if (DBCourseUtils.isUserRegisteredOnCourse((Connection) session.getAttribute("connection"), c.getCourseId(), userId)) {
+        %>
+        <p>You are already registered for this course.</p>
         <%
             } else {
         %>
@@ -43,5 +50,6 @@
         }
     %>
 </ul>
+<a href="createCourse.jsp">Create New Course</a>
 </body>
 </html>

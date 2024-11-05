@@ -105,7 +105,7 @@ public class DBCourseUtils {
     }
 
     public static void registerOnCourse(Connection con, int courseId, int userId) throws SQLException {
-        String sqlRequest = "INSERT INTO participant VALUES (?, ?)";
+        String sqlRequest = "INSERT INTO participant (course_id, user_id) VALUES (?, ?)";
 
         try(PreparedStatement preparedStatement = con.prepareStatement(sqlRequest)) {
             preparedStatement.setInt(1, courseId);
@@ -120,7 +120,7 @@ public class DBCourseUtils {
 
         String query = """
                 SELECT c.course_id, c.name, c.description, c.max_students_amount, c.teacher_id, c.price FROM course c
-                JOIN participant p ON c.course_id = p.user_id WHERE p.user_id = ?
+                JOIN participant p ON c.course_id = p.course_id WHERE p.user_id = ?
                 """;
 
         try (PreparedStatement pstmt = con.prepareStatement(query)) {
@@ -140,5 +140,24 @@ public class DBCourseUtils {
             }
         }
         return courses;
+    }
+
+    public static boolean isUserRegisteredOnCourse(Connection con, int courseId, int userId) throws SQLException {
+        String sql = "SELECT * FROM participant WHERE course_id = ? AND user_id = ?";
+        try(PreparedStatement pstm = con.prepareStatement(sql)){
+            pstm.setInt(1, courseId);
+            pstm.setInt(2, userId);
+            ResultSet resultSet = pstm.executeQuery();
+            return resultSet.next();
+        }
+    }
+
+    public static void leaveCourse(Connection con, int courseId, int userId) throws SQLException {
+        String sql = "DELETE FROM participant WHERE course_id = ? AND user_id = ?";
+        try(PreparedStatement pstm = con.prepareStatement(sql)){
+            pstm.setInt(1, courseId);
+            pstm.setInt(2, userId);
+            pstm.executeUpdate();
+        }
     }
 }

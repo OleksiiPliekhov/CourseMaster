@@ -1,5 +1,8 @@
 <%@ page import="com.example.coursesSystem.models.Course" %>
-<%@ page import="com.example.coursesSystem.models.User" %><%--
+<%@ page import="com.example.coursesSystem.models.User" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="com.example.coursesSystem.repositories.DBCourseUtils" %>
+<%@ page import="java.sql.SQLException" %><%--
   Created by IntelliJ IDEA.
   User: aleks
   Date: 10/17/2024
@@ -27,12 +30,25 @@
 
 <% if (userId != null && userId.equals(teacherId)) { %>
 <a href="course-update.jsp?courseId=${course.courseId}">Edit Course</a>
-<% } else {%>
-<form action="course" method="post">
+<% }
+else {
+    try {
+        if (DBCourseUtils.isUserRegisteredOnCourse((Connection) session.getAttribute("connection"), ((Course)request.getAttribute("course")).getCourseId(), userId)) {%>
+<form action="leaveCourse" method="post">
     <input type="hidden" name="courseId" value="${course.courseId}" />
-    <input type="submit" value="Register">
+    <input type="submit" value="Leave">
 </form>
-<%}%>
+        <% }else {%>
+        <form action="course" method="post">
+            <input type="hidden" name="courseId" value="${course.courseId}" />
+            <input type="submit" value="Register">
+        </form>
+        <%}
+} catch (SQLException e) {
+    throw new RuntimeException(e);
+}
+}
+%>
 
 </body>
 </html>

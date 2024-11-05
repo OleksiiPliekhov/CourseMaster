@@ -6,6 +6,7 @@ import com.example.coursesSystem.models.Teacher;
 import com.example.coursesSystem.models.User;
 import com.example.coursesSystem.repositories.DBCourseUtils;
 import com.example.coursesSystem.repositories.DBTeacherUtils;
+import com.example.coursesSystem.repositories.DBUserUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,27 +24,25 @@ public class RegisterCourseServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Connection con = (Connection) session.getAttribute("connection");
-        try {
-            con = DBConnection.initDBConnection();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        String courseIdParam = request.getParameter("id");
+
+        String courseIdParam = request.getParameter("courseId");
         if (courseIdParam != null) {
             int courseId = Integer.parseInt(courseIdParam);
             Course course = null;
             Teacher teacher = null;
             try {
                 course = DBCourseUtils.findCourseById(con, courseId);
-                assert course != null;
-                teacher = DBTeacherUtils.findTeacherById(con, course.getTeacherId());
+
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
             if(course != null) {
                 request.setAttribute("course", course);
+                try {
+                    teacher = DBTeacherUtils.findTeacherById(con, course.getTeacherId());
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
                 request.setAttribute("teacher", teacher);
                 request.getRequestDispatcher("/course-page.jsp").forward(request, response);
             }
@@ -55,12 +54,14 @@ public class RegisterCourseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        int courseId = Integer.parseInt( (String) req.getAttribute("courseId"));
+        int courseId = Integer.parseInt(req.getParameter("courseId"));
         User user = (User) session.getAttribute("user");
         Connection con = (Connection) session.getAttribute("connection");
         try {
+            Course course = DBCourseUtils.findCourseById(con, courseId);
             DBCourseUtils.registerOnCourse(con, courseId, user.getId());
-            resp.sendRedirect("/courses");
+            DBUserUtils.withdrawMoney(con, user.getId(), course.getPrice());
+            req.getRequestDispatcher("/participatedCourses.jsp?userId=" + user.getId()).forward(req, resp);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

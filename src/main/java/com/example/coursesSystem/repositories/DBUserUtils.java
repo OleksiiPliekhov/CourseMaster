@@ -94,13 +94,13 @@ public class DBUserUtils {
         return 0;
     }
 
-    public static boolean withdrawMoney(Connection con, int userId, int amount) throws SQLException {
+    public static boolean withdrawMoney(Connection con, int userId, double amount) throws SQLException {
         String checkBalanceSql = "SELECT balance FROM \"user\" WHERE id = ?";
         try (PreparedStatement checkBalanceStmt = con.prepareStatement(checkBalanceSql)) {
             checkBalanceStmt.setInt(1, userId);
             ResultSet resultSet = checkBalanceStmt.executeQuery();
             if (resultSet.next()) {
-                int balance = resultSet.getInt("balance");
+                double balance = resultSet.getDouble("balance");
                 if (balance < amount) {
                     return false; // Insufficient balance
                 }
@@ -109,17 +109,17 @@ public class DBUserUtils {
 
         String sql = "UPDATE \"user\" SET balance = balance - ? WHERE id = ?";
         try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
-            preparedStatement.setInt(1, amount);
+            preparedStatement.setDouble(1, amount);
             preparedStatement.setInt(2, userId);
             return preparedStatement.executeUpdate() > 0;
         }
     }
 
-    public static boolean depositMoney(Connection con, int userId, int amount) throws SQLException {
+    public static boolean depositMoney(Connection con, int userId, double amount) throws SQLException {
         String sql = "UPDATE \"user\" SET balance = balance + ? WHERE id = ?";
 
         try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
-            preparedStatement.setInt(1, amount);
+            preparedStatement.setDouble(1, amount);
             preparedStatement.setInt(2, userId);
             return preparedStatement.executeUpdate() > 0;
         }

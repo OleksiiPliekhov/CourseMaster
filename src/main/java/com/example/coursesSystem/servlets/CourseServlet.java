@@ -36,11 +36,11 @@ public class CourseServlet extends HttpServlet {
         HttpSession session = req.getSession();
         Connection con = (Connection) session.getAttribute("connection");
 
-        String name = (String) session.getAttribute("name");
-        String description = (String) session.getAttribute("description");
-        int maxStudentsAmount  = (int) session.getAttribute("maxStudentsAmount");
-        int teacherId = (int) session.getAttribute("teacherId");
-        double price = (double) session.getAttribute("price");
+        String name =  req.getParameter("name");
+        String description =  req.getParameter("description");
+        int maxStudentsAmount  = Integer.parseInt(req.getParameter("maxStudentsAmount"));
+        int teacherId = Integer.parseInt(req.getParameter("teacherId"));
+        double price = Double.parseDouble(req.getParameter("price"));
 
         Course newCourse = new Course(name, description, maxStudentsAmount, teacherId, price);
         boolean res = false;
@@ -50,10 +50,9 @@ public class CourseServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
         if(res) {
-            resp.sendRedirect(getServletContext() + "/courses.jsp");
+            resp.sendRedirect( "courses");
         } else {
-            session.setAttribute("creationError",  "Something went wrong, try again");
-            resp.sendRedirect(getServletContext() + "/create-course-page.jsp");
+            resp.sendRedirect("/createCourse.jsp");
         }
 
     }

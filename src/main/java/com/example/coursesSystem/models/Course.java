@@ -4,9 +4,6 @@ public class Course {
     int courseId;
     private String name;
     private  String description;
-
-
-
     private double price;
     private int maxStudentsAmount;
     private int teacherId;

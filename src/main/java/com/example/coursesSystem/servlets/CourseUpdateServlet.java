@@ -35,7 +35,7 @@ public class CourseUpdateServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
         if(res) {
-            resp.sendRedirect(req.getContextPath() + "/course?id=" + courseId);
+            resp.sendRedirect(req.getContextPath() + "/course?courseId=" + courseId);
         } else {
             req.setAttribute("updatingError",  "Something went wrong, try again");
             req.getRequestDispatcher("/courseUpdate").forward(req, resp);
