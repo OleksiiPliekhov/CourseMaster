@@ -3,7 +3,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.coursesSystem.models.User" %>
 <%@ page import="java.sql.Connection" %>
-<%@ page import="com.example.coursesSystem.repositories.DBCourseUtils" %>
+<%@ page import="com.example.coursesSystem.utils.DBCourseUtils" %>
+<%@ page import="com.example.coursesSystem.utils.DBTeacherUtils" %>
 
 <html>
 <head>
@@ -50,6 +51,10 @@
         }
     %>
 </ul>
+<%
+    if (DBTeacherUtils.isTeacher((Connection) session.getAttribute("connection"), ((User) session.getAttribute("user")).getId())) {
+%>
 <a href="createCourse.jsp">Create New Course</a>
+<% } %>
 </body>
 </html>

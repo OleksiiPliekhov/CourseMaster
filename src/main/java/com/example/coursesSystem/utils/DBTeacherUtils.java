@@ -1,4 +1,4 @@
-package com.example.coursesSystem.repositories;
+package com.example.coursesSystem.utils;
 
 import com.example.coursesSystem.Degree;
 import com.example.coursesSystem.models.Teacher;

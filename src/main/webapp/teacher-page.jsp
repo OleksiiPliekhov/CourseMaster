@@ -1,6 +1,6 @@
 <%@ page import="com.example.coursesSystem.models.Teacher" %>
 <%@ page import="com.example.coursesSystem.models.User" %>
-<%@ page import="com.example.coursesSystem.repositories.DBTeacherUtils" %>
+<%@ page import="com.example.coursesSystem.utils.DBTeacherUtils" %>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

@@ -1,5 +1,5 @@
 <%@ page import="java.sql.Connection" %>
-<%@ page import="com.example.coursesSystem.repositories.DBUserUtils" %>
+<%@ page import="com.example.coursesSystem.utils.DBUserUtils" %>
 <%@ page import="com.example.coursesSystem.models.User" %><%--
   Created by IntelliJ IDEA.
   User: aleks

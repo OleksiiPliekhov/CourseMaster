@@ -1,7 +1,7 @@
 <%@ page import="com.example.coursesSystem.models.Course" %>
 <%@ page import="com.example.coursesSystem.models.User" %>
 <%@ page import="java.sql.Connection" %>
-<%@ page import="com.example.coursesSystem.repositories.DBCourseUtils" %>
+<%@ page import="com.example.coursesSystem.utils.DBCourseUtils" %>
 <%@ page import="java.sql.SQLException" %><%--
   Created by IntelliJ IDEA.
   User: aleks

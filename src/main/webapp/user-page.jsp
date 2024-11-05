@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.example.coursesSystem.UserBean" %>
 <%@ page import="com.example.coursesSystem.models.User" %>
 
 
@@ -16,7 +15,7 @@
 <body>
 <%@ include file="header.jsp" %>
 
-<jsp:useBean id="user" class="com.example.coursesSystem.UserBean" scope="request" />
+<jsp:useBean id="user" class="com.example.coursesSystem.models.User" scope="request" />
 
 <jsp:setProperty name="user" property="firstname" value="${userInfo.firstname}" />
 <jsp:setProperty name="user" property="lastname" value="${userInfo.lastname}" />

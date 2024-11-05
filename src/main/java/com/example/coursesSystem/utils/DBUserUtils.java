@@ -1,4 +1,4 @@
-package com.example.coursesSystem.repositories;
+package com.example.coursesSystem.utils;
 
 import com.example.coursesSystem.models.User;
 
@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 
 public class DBUserUtils {
     public static User findUserById(Connection con, int userId) throws SQLException {

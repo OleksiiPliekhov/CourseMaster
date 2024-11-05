@@ -1,8 +1,7 @@
 package com.example.coursesSystem.servlets;
 
 import com.example.coursesSystem.models.User;
-import com.example.coursesSystem.repositories.DBCourseUtils;
-import com.example.coursesSystem.repositories.DBUserUtils;
+import com.example.coursesSystem.utils.DBUserUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

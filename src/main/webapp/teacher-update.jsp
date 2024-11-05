@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="com.example.coursesSystem.models.Teacher" %>
-<%@ page import="com.example.coursesSystem.repositories.DBTeacherUtils" %>
+<%@ page import="com.example.coursesSystem.utils.DBTeacherUtils" %>
 
 <%
     int teacherId = Integer.parseInt(request.getParameter("teacherId"));
